@@ -1,5 +1,5 @@
-/**
- * Copyright (C) 2011 Johan Andren <johan@markatta.com>
+/*
+ * Copyright (C) 2011 Johan Andren <johan@com.markatta.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,6 @@ public interface DistanceAlgorithm<T> {
      * Calculate distance between <code>a</code> and <code>b</code>
      * @return a float value between 1 (identic) and 0 (not at all alike) 
      */
-    public double calculateDistance(T a, T b);
+    double calculateDistance(T a, T b);
     
 }

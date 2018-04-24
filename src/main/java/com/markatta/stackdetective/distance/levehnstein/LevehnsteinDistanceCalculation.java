@@ -1,10 +1,10 @@
 package com.markatta.stackdetective.distance.levehnstein;
 
+import com.markatta.stackdetective.model.Entry;
+
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import com.markatta.stackdetective.model.Entry;
 
 /**
  * Implementation of the levehnstein distance calculation algorithm. 
@@ -78,7 +78,7 @@ final class LevehnsteinDistanceCalculation {
     /**
      * Must be called in order as it relies on the values for lower i and j to
      * be available.
-     * @return The minimum distance between the substring 0-i from entry list a
+     *         The minimum distance between the substring 0-i from entry list a
      *         and the substring 0-j from entry list b.
      */
     private void calculateCostFor(int i, int j) {

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2011 Johan Andren <johan@markatta.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +16,7 @@
 package com.markatta.stackdetective.distance.levehnstein;
 
 import com.markatta.stackdetective.model.Entry;
+
 import java.util.List;
 
 /**
@@ -32,7 +33,7 @@ interface DistanceCostStrategy {
 	double delete(List<Entry> entries, int index);
 
     /**
-     * @return  The cost to add an entry on <code>index</code> in <code>entries</code>
+     * @return  The cost to addNew an entry on <code>index</code> in <code>entries</code>
      */
 	double add(List<Entry> entries, int index);
 

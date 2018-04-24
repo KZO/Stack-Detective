@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 /**
@@ -13,11 +12,15 @@ import java.util.concurrent.Future;
  */
 public class WeightedAlgorithmCombination<T> implements DistanceAlgorithm<T> {
 
-	private final List<DistanceAlgorithm<T>> algorithms = new ArrayList<DistanceAlgorithm<T>>();
+	private final List<DistanceAlgorithm<T>> algorithms = new ArrayList<>();
 
-	private final List<Double> weights = new ArrayList<Double>();
+	private final List<Double> weights = new ArrayList<>();
 
-	private final ExecutorService executor = Executors.newCachedThreadPool();
+	private final ExecutorService executor;
+
+	public WeightedAlgorithmCombination(ExecutorService executor) {
+		this.executor = executor;
+	}
 
 	/**
 	 * The sum of the weights must be 1 or else an exception is thrown when the
@@ -31,7 +34,7 @@ public class WeightedAlgorithmCombination<T> implements DistanceAlgorithm<T> {
 	@Override
 	public double calculateDistance(T a, T b) {
 
-		List<AlgorithmCallable> callables = new ArrayList<AlgorithmCallable>(algorithms.size());
+		List<AlgorithmCallable> callables = new ArrayList<>(algorithms.size());
 		for (int i = 0; i < algorithms.size(); i++) {
 			DistanceAlgorithm<T> algorithm = algorithms.get(i);
 			double weight = weights.get(i);
@@ -43,9 +46,7 @@ public class WeightedAlgorithmCombination<T> implements DistanceAlgorithm<T> {
 				distance += future.get();
 
 			}
-		} catch (InterruptedException e) {
-			throw new RuntimeException(e);
-		} catch (ExecutionException e) {
+		} catch (InterruptedException | ExecutionException e) {
 			throw new RuntimeException(e);
 		}
 
@@ -62,6 +63,7 @@ public class WeightedAlgorithmCombination<T> implements DistanceAlgorithm<T> {
 
 		private final double weight;
 
+		@SuppressWarnings("WeakerAccess")
 		public AlgorithmCallable(DistanceAlgorithm<T> algorithm, T a, T b, double weight) {
 			super();
 			this.algorithm = algorithm;
@@ -71,7 +73,7 @@ public class WeightedAlgorithmCombination<T> implements DistanceAlgorithm<T> {
 		}
 
 		@Override
-		public Double call() throws Exception {
+		public Double call() {
 			return algorithm.calculateDistance(a, b) * weight;
 		}
 

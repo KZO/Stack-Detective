@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2011 Johan Andren <johan@markatta.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,8 +16,9 @@
 package com.markatta.stackdetective.parse;
 
 import com.markatta.stackdetective.model.Entry;
-import com.markatta.stackdetective.model.StackTrace;
 import com.markatta.stackdetective.model.Segment;
+import com.markatta.stackdetective.model.StackTrace;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -47,7 +48,7 @@ public final class NaiveTextParser implements StackTraceTextParser {
     public StackTrace parse(CharSequence stacktrace) {
         StringTokenizer tokenizer = new StringTokenizer(stacktrace.toString(), "\n");
         StringBuilder builder = new StringBuilder();
-        List<Segment> segments = new ArrayList<Segment>();
+        List<Segment> segments = new ArrayList<>();
 
         boolean seenAnAtYet = false;
         while (tokenizer.hasMoreTokens()) {
@@ -116,7 +117,7 @@ public final class NaiveTextParser implements StackTraceTextParser {
 
         String[] segmentLines = sequence.toString().split("\n");
         String exceptionText = "";
-        List<Entry> entries = new ArrayList<Entry>(segmentLines.length);
+        List<Entry> entries = new ArrayList<>(segmentLines.length);
         for (String line : segmentLines) {
             String current = line.trim();
             if (!current.startsWith("at")) {
@@ -148,7 +149,7 @@ public final class NaiveTextParser implements StackTraceTextParser {
         } else {
             // TODO: remove thread part?
         }
-        String exceptionType = null;
+        String exceptionType;
         int indexOfEndOfType = exceptionText.indexOf(':');
         if (indexOfEndOfType > -1) {
             exceptionType = exceptionText.substring(0, indexOfEndOfType);
@@ -159,8 +160,7 @@ public final class NaiveTextParser implements StackTraceTextParser {
         }
 
 
-        Segment segment = new Segment(exceptionType, exceptionText, entries);
-        return segment;
+        return new Segment(exceptionType, exceptionText, entries);
     }
 
     /**
@@ -197,9 +197,9 @@ public final class NaiveTextParser implements StackTraceTextParser {
 
         String parenthesisContents = trimmed.substring(startParenthesis + 1, trimmed.length() - 1);
         int lineNumber = -1;
-        String fileName = null;
+        String fileName;
         if (parenthesisContents.indexOf(':') > -1) {
-            String[] parts = parenthesisContents.split("\\:");
+            String[] parts = parenthesisContents.split(":");
             fileName = parts[0];
             lineNumber = Integer.parseInt(parts[1]);
         } else {

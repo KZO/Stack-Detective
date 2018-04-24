@@ -4,7 +4,7 @@ import com.markatta.stackdetective.distance.DistanceAlgorithm;
 import com.markatta.stackdetective.model.StackTrace;
 
 public class NumberOfSegmentsAlgorithm implements DistanceAlgorithm<StackTrace> {
-	
+
 	@Override
 	public double calculateDistance(StackTrace a, StackTrace b) {
 		final int sizeA = a.getSegments().size();

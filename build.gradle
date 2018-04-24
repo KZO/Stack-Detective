@@ -1,0 +1,49 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'com.markatta'
+version = '3.0'
+
+sourceCompatibility = 1.8
+
+
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+
+    testCompile 'junit:junit:4.12'
+}
+
+if(System.getProperty("kzoRepoUser") == null || System.getProperty("kzoRepoPassword") == null) {
+    println("WARNING! For upload to kzo maven repository artifact this project you should set credentials")
+    println("         contain username and password")
+    println("         as example: gradle build -DkzoRepoUser=<username> -DkzoRepoPassword=<password>")
+} else {
+    apply plugin: 'maven'
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                repository(url: "https://nexus.kzoinnovations.com/nexus/content/repositories/kzoinnovations-releases/") {
+                    authentication(userName: System.getProperty("kzoRepoUser"), password: System.getProperty("kzoRepoPassword"))
+                }
+            }
+        }
+    }
+}

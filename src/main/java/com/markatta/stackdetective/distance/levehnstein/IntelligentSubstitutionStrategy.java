@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2011 Johan Andren <johan@markatta.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,11 +15,11 @@
  */
 package com.markatta.stackdetective.distance.levehnstein;
 
+import com.markatta.stackdetective.model.Entry;
+
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import com.markatta.stackdetective.model.Entry;
 
 /**
  * A weighted cost calculator that makes differences in the beginning and end of
@@ -45,7 +45,7 @@ final class IntelligentSubstitutionStrategy implements DistanceCostStrategy {
 	private static final double IDENTICAL_COST = 0;
 
 	/**
-	 * The same for both add and delete
+	 * The same for both addNew and delete
 	 */
 	private double nonSubstitutionCost(final List<Entry> list, final int index) {
 
@@ -82,7 +82,7 @@ final class IntelligentSubstitutionStrategy implements DistanceCostStrategy {
 		return positionMultiplier * entryDifferenceCost;
 	}
 
-	private final static double positionMultiplier(int listSize, int position) {
+	private static double positionMultiplier(int listSize, int position) {
 		// cost increases from the center of the list to ~1 * the multiplier
 		// on the first and last line of the list
 		// but never less than 0.1 of the cost

@@ -1,5 +1,5 @@
-/**
- * Copyright (C) 2011 Johan Andren <johan@markatta.com>
+/*
+ * Copyright (C) 2011 Johan Andren <johan@com.markatta.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ enum TokenType {
 
     private final Pattern regexp;
 
-    private TokenType(String regexpString) {
+    TokenType(String regexpString) {
         regexp = Pattern.compile(regexpString);
     }
 

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2011 Johan Andren <johan@markatta.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,18 +15,18 @@
  */
 package com.markatta.stackdetective.distance.levehnstein;
 
+import com.markatta.stackdetective.distance.DistanceAlgorithm;
+import com.markatta.stackdetective.filter.EntryFilter;
+import com.markatta.stackdetective.model.Entry;
+import com.markatta.stackdetective.model.Segment;
+import com.markatta.stackdetective.model.StackTrace;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import com.markatta.stackdetective.distance.DistanceAlgorithm;
-import com.markatta.stackdetective.filter.EntryFilter;
-import com.markatta.stackdetective.model.Entry;
-import com.markatta.stackdetective.model.Segment;
-import com.markatta.stackdetective.model.StackTrace;
 
 /**
  * Uses a weighted variation of the levenshtein distance calculation algorithm
@@ -122,7 +122,7 @@ public final class WeightedLevehnsteinDistance implements DistanceAlgorithm<Stac
 	}
 
 	private void applyFilter(List<Entry> entries) {
-		Collection<Entry> toRemove = new HashSet<Entry>();
+		Collection<Entry> toRemove = new HashSet<>();
 		for (int i = 0; i < entries.size(); i++) {
 			Entry entry = entries.get(i);
 			if (!filter.include(entry, i)) {

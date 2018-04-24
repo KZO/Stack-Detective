@@ -1,7 +1,5 @@
 package com.markatta.stackdetective.distance.misc;
 
-import org.w3c.dom.Text;
-
 import com.markatta.stackdetective.distance.DistanceAlgorithm;
 import com.markatta.stackdetective.model.StackTrace;
 
@@ -33,7 +31,7 @@ public class RootTextComparisonAlgorithm implements DistanceAlgorithm<StackTrace
 	 * Shamelessly stolen from rosetta code
 	 * (http://rosettacode.org/wiki/Longest_common_subsequence#Java)
 	 */
-	public static String longestCommonSubstring(String a, String b) {
+	private static String longestCommonSubstring(String a, String b) {
 		int[][] lengths = new int[a.length() + 1][b.length() + 1];
 
 		// row 0 and column 0 are initialized to 0 already
@@ -46,7 +44,7 @@ public class RootTextComparisonAlgorithm implements DistanceAlgorithm<StackTrace
 					lengths[i + 1][j + 1] = Math.max(lengths[i + 1][j], lengths[i][j + 1]);
 
 		// read the substring out from the matrix
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (int x = a.length(), y = b.length(); x != 0 && y != 0;) {
 			if (lengths[x][y] == lengths[x - 1][y])
 				x--;

@@ -1,5 +1,5 @@
-/**
- * Copyright (C) 2011 Johan Andren <johan@markatta.com>
+/*
+ * Copyright (C) 2011 Johan Andren <johan@com.markatta.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,13 +20,13 @@ package com.markatta.stackdetective.parse;
  * 
  * @author johan
  */
-public final class ParseException extends RuntimeException {
+final class ParseException extends RuntimeException {
 
-    public ParseException(String message, Throwable cause) {
+    ParseException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public ParseException(String message) {
+    ParseException(String message) {
         super(message);
     }
 }

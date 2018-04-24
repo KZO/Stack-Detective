@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2011 Johan Andren <johan@markatta.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,14 +15,13 @@
  */
 package com.markatta.stackdetective.clustering;
 
+import com.markatta.stackdetective.distance.DistanceAlgorithm;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
-import com.markatta.stackdetective.distance.DistanceAlgorithm;
-import com.markatta.stackdetective.model.StackTrace;
 
 /**
  * Dynamic distance matrix, that grows as elements are added. Keeps the
@@ -32,14 +31,15 @@ import com.markatta.stackdetective.model.StackTrace;
  */
 public final class DistanceMatrix<T> {
 
-	private final Map<T, SortedSet<Distance<T>>> distances = new HashMap<T, SortedSet<Distance<T>>>();
+	private final Map<T, SortedSet<Distance<T>>> distances = new HashMap<>();
 
-	private final DistanceAlgorithm calculator;
+	private final DistanceAlgorithm<T> calculator;
 
 	/**
 	 * @param calculator
 	 *            A calculator used for calculating the actual distances.
 	 */
+	@SuppressWarnings("WeakerAccess")
 	public DistanceMatrix(DistanceAlgorithm<T> calculator) {
 		this.calculator = calculator;
 	}
@@ -61,11 +61,11 @@ public final class DistanceMatrix<T> {
 
 		// from this to the other
 		double distance = calculator.calculateDistance(newItem, otherItem);
-		distancesForThis.add(new Distance<T>(newItem, otherItem, distance));
+		distancesForThis.add(new Distance<>(newItem, otherItem, distance));
 
 		// from other to this
 		distance = calculator.calculateDistance(otherItem, newItem);
-		distancesForOther.add(new Distance<T>(otherItem, newItem, distance));
+		distancesForOther.add(new Distance<>(otherItem, newItem, distance));
 
 	}
 
@@ -76,7 +76,7 @@ public final class DistanceMatrix<T> {
 	 */
 	private SortedSet<Distance<T>> getOrCreateDistanceSetFrom(T item) {
 		if (!distances.containsKey(item)) {
-			distances.put(item, new TreeSet<Distance<T>>());
+			distances.put(item, new TreeSet<>());
 		}
 
 		return distances.get(item);

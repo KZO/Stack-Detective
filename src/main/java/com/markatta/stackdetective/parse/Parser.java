@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2011 Johan Andren <johan@markatta.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,12 +18,13 @@ package com.markatta.stackdetective.parse;
 import com.markatta.stackdetective.model.Entry;
 import com.markatta.stackdetective.model.Segment;
 import com.markatta.stackdetective.model.StackTrace;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /**
- * Takes a list of tokens and constructs an object graph with the stackdetective
+ * Takes a list of tokens and constructs an object graph with the com.markatta.stackdetective
  * data model out of them.
  * 
  * @author johan
@@ -69,13 +70,13 @@ final class Parser {
                         }
                 }
             }
-            // add last segment
+            // addNew last segment
             stackTrace.addSegment(currentSegment);
 
             return stackTrace;
         } catch (ParseException ex) {
             StringBuilder builder = new StringBuilder();
-            List<Token> reversed = new ArrayList<Token>(tokens);
+            List<Token> reversed = new ArrayList<>(tokens);
             Collections.reverse(reversed);
             for (Token object : reversed) {
                 builder.append(object.getText());

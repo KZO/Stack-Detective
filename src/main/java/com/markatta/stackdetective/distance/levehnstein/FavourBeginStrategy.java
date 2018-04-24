@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2011 Johan Andren <johan@markatta.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +16,7 @@
 package com.markatta.stackdetective.distance.levehnstein;
 
 import com.markatta.stackdetective.model.Entry;
+
 import java.util.List;
 
 /**
